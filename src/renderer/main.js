@@ -13,9 +13,9 @@ Vue.use(ElementUI, {
 })
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSuitcaseRolling, faCalendarCheck, faList, faCheckSquare, faCog, faBell, faFilter, faAngleDoubleLeft, faAngleDoubleRight, faPlus, faFilePdf } from '@fortawesome/free-solid-svg-icons'
+import { faSuitcaseRolling, faCalendarCheck, faList, faCheckSquare, faCog, faBell, faFilter, faAngleDoubleLeft, faAngleDoubleRight, faPlus, faFilePdf, faMapMarkerAlt, faPlaneDeparture, faPlaneArrival, faHotel, faCarSide, faEdit, faTrashAlt, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faSuitcaseRolling, faCalendarCheck, faList, faCheckSquare, faCog, faBell, faFilter, faAngleDoubleLeft, faAngleDoubleRight, faPlus, faFilePdf)
+library.add(faSuitcaseRolling, faCalendarCheck, faList, faCheckSquare, faCog, faBell, faFilter, faAngleDoubleLeft, faAngleDoubleRight, faPlus, faFilePdf, faMapMarkerAlt, faPlaneDeparture, faPlaneArrival, faHotel, faCarSide, faEdit, faTrashAlt, faMapMarkedAlt)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))

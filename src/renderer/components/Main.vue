@@ -22,16 +22,16 @@
             </el-date-picker>
             <div id="trip-tags">
                 <el-tag class="tag days" type="info" v-if="dates.length > 0">days: {{getDays(dates)}}</el-tag>
-                <el-tooltip effect="dark" content="click to edit" placement="bottom">
+                <el-tooltip effect="dark" content="click to see/edit" placement="top">
                     <el-tag class="tag">place of interests: 0</el-tag>
                 </el-tooltip>
-                <el-tooltip effect="dark" content="click to edit" placement="bottom">
+                <el-tooltip effect="dark" content="click to see/edit" placement="top">
                     <el-tag class="tag" type="danger">restaurants: 0</el-tag>
                 </el-tooltip>
-                <el-tooltip effect="dark" content="click to edit" placement="bottom">
+                <el-tooltip effect="dark" content="click to see/edit" placement="top">
                     <el-tag class="tag" type="warning">events: 0</el-tag>
                 </el-tooltip>
-                <el-tooltip effect="dark" content="click to edit" placement="bottom">
+                <el-tooltip effect="dark" content="click to see/edit" placement="top">
                     <el-tag class="tag" type="success">todo: 0</el-tag>
                 </el-tooltip>
             </div>
@@ -40,10 +40,10 @@
             <el-collapse accordion>
                 <el-collapse-item :key="index" v-for="(day, index) in days.filter((item) => !!item.date)">
                     <template slot="title">
-                        <el-tag size="mini" class="tag" type="success">Day {{index + 1}}</el-tag>
+                        <el-tag size="small" class="tag" type="success">Day {{index + 1}}</el-tag>
                         {{formatDate(day.date)}}
                     </template>
-                    <div></div>
+                    <day :date="day.date" :timeline="day.timeline" :dayIndex="index"/>
                 </el-collapse-item>
             </el-collapse>
         </div>
@@ -53,16 +53,56 @@
 
 <script>
   import {mixin} from '@/base.js'
+  import day from '@/components/main/Day.vue'
   export default {
     name: 'trip-main',
     mixins: [mixin],
+    components: { day },
     data() {
       return {
           title: "Paris",
           dates: [new Date("2019-07-27"), new Date("2019-07-28")],
           days: [{
               date: new Date("2019-07-27"),
-              timeline: []
+              timeline: [{
+                  icon: "map-marker-alt",
+                  type: "origin",
+                  timestamp: "Calgary",
+                  notes: "Leaving from home at 07:30",
+                  iconSize: "18px"
+              },{
+                  icon: "plane-departure",
+                  timestamp: "10:00 MST, YYC Airport",
+                  location: "Calgary International Airport",
+                  navigationLink: "https://goo.gl/maps/xtTmekGf6HXE6WBy7",
+                  notes: "WS 10, ref: 6DH278",
+                  iconSize: "14px"
+              },{
+                  icon: "plane-arrival",
+                  timestamp: "15:00 CEST, CDG Airport",
+                  notes: "duration: 9h 20m",
+                  iconSize: "14px"
+              }, {
+                  icon: "car-side",
+                  timestamp: "National car rental CDG",
+                  type: "car-rental",
+                  notes: "ref: JH9843JHDS",
+                  location: "",
+                  iconSize: "14px"
+              }, {
+                  icon: "hotel",
+                  timestamp: "Hyatt Regency Paris Etoile",
+                  type: "hotel",
+                  notes: "check-in: 15:00",
+                  location: "3 Place du Général Kœnig, 75017 Paris",
+                  navigationLink: "https://goo.gl/maps/WCTZkYfH1U9vjxLZ6",
+                  iconSize: "14px"
+              }, {
+                  icon: "map-marker-alt",
+                  type: "destination",
+                  timestamp: "Paris",
+                  iconSize: "18px"
+              }]
           }, {
               date: new Date("2019-07-28"),
               timeline: []
@@ -134,6 +174,8 @@
 <style scoped>
     #trip-content{
         width: calc(100% - 250px);
+        overflow-x: hidden;
+        overflow-y: auto;
     }
     .collapse + #trip-content{
         width: calc(100% - 65px);
@@ -150,7 +192,6 @@
         outline: none;
     }
     .tag{
-        margin-right: 10px;
         cursor: pointer;
     }
     .tag.days{
@@ -168,6 +209,9 @@
     #trip-days{
         margin: 50px 0;
     }
+    #trip-days .tag{
+        margin-right: 10px;
+    }
     #toolbar{
         position: absolute;
         right: 30px;
@@ -183,6 +227,9 @@
 <style>
     #trip-date .el-range-editor{
         border: none;
+    }
+    #trip-content .el-collapse-item__content{
+        padding: 10px 20px;
     }
 </style>
 
