@@ -7,7 +7,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'today',
+      name: 'main',
       component: require('@/components/Main').default
     },
     {

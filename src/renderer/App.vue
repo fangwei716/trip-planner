@@ -21,11 +21,16 @@
     line-height: 1.5;
     overflow: hidden;
     background-color: #fff;
+    font-family: 'BlinkMacSystemFont', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
   }
   body{
     margin: 0;
   }
   body, #app{
     height: 100%;
+  }
+  #app{
+    display: flex;
+    justify-content: space-between;
   }
 </style>
